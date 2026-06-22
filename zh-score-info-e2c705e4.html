@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>再次打开 · 雷速体育 · 如见老友</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #fbf3e0 0%, #fae6cf 40%, #f5d7b5 100%);
+            font-family: system-ui, -apple-system, 'Segoe UI', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.2rem;
+            line-height: 1.7;
+            color: #3d2e24;
+        }
+
+        .container {
+            max-width: 780px;
+            width: 100%;
+            background: rgba(255, 252, 247, 0.92);
+            backdrop-filter: blur(2px);
+            border-radius: 42px 42px 36px 36px;
+            box-shadow: 0 18px 40px -12px rgba(120, 70, 30, 0.28), 0 4px 12px rgba(0, 0, 0, 0.04);
+            padding: 2.8rem 2.6rem;
+            transition: box-shadow 0.25s;
+        }
+
+        @media (max-width: 540px) {
+            body {
+                padding: 1.2rem 0.8rem;
+            }
+            .container {
+                padding: 2rem 1.4rem;
+                border-radius: 32px;
+            }
+        }
+
+        /* 文章头部 */
+        .article-header {
+            margin-bottom: 2.2rem;
+            border-bottom: 2px solid #e9d6c0;
+            padding-bottom: 1.2rem;
+        }
+
+        .article-title {
+            font-size: 2rem;
+            font-weight: 580;
+            letter-spacing: -0.02em;
+            color: #2f221a;
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+        }
+
+        .article-title small {
+            font-size: 1.1rem;
+            font-weight: 380;
+            color: #8f745c;
+            letter-spacing: 0.3px;
+            margin-left: 0.4rem;
+        }
+
+        .article-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem 1.6rem;
+            font-size: 0.92rem;
+            color: #7f6957;
+            margin-top: 0.2rem;
+        }
+
+        .article-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .article-meta .tag {
+            background: #ebdbcb;
+            color: #503e30;
+            padding: 0.1rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 480;
+        }
+
+        /* 导语 */
+        .excerpt {
+            font-size: 1.08rem;
+            background: #fbf3ea;
+            padding: 1.6rem 1.8rem;
+            border-radius: 28px;
+            margin-bottom: 2.2rem;
+            border-left: 6px solid #c9a17b;
+            color: #3b2b1f;
+            box-shadow: inset 0 1px 4px rgba(255, 215, 175, 0.3);
+        }
+
+        .excerpt strong {
+            font-weight: 560;
+            color: #5b3f2b;
+        }
+
+        /* 正文段落 */
+        .body-text p {
+            margin-bottom: 1.6rem;
+            font-size: 1rem;
+            word-break: break-word;
+        }
+
+        .body-text a {
+            color: #7b5538;
+            text-decoration: none;
+            font-weight: 520;
+            border-bottom: 2px solid #dbbca3;
+            padding-bottom: 1px;
+            transition: background 0.15s, border-color 0.2s;
+            border-radius: 4px 4px 0 0;
+        }
+
+        .body-text a:hover {
+            background: #f0decf;
+            border-bottom-color: #855f42;
+        }
+
+        .body-text .inline-card {
+            display: inline-block;
+            background: #f4e8dc;
+            padding: 0.1rem 0.7rem;
+            border-radius: 30px;
+            font-weight: 460;
+            color: #4b3729;
+        }
+
+        /* 引用/提示块 */
+        .callout {
+            background: #fff3e9;
+            border-radius: 28px;
+            padding: 1.6rem 1.8rem;
+            margin: 2rem 0 1.8rem;
+            border: 1px solid #ecdccc;
+            box-shadow: 0 4px 10px rgba(150, 100, 60, 0.06);
+        }
+
+        .callout-title {
+            font-weight: 560;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 0.6rem;
+            color: #533f2f;
+        }
+
+        .callout-title span {
+            background: #dbbc9f;
+            color: #2f1f15;
+            font-size: 0.78rem;
+            padding: 0.1rem 0.8rem;
+            border-radius: 30px;
+        }
+
+        .callout p {
+            margin-bottom: 0.4rem;
+        }
+
+        .callout p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* 特色卡片 (灵活区域) */
+        .feature-quick {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem 1rem;
+            margin: 2rem 0 1.2rem;
+            background: #fcf6ef;
+            padding: 1.4rem 1.6rem;
+            border-radius: 30px;
+        }
+
+        .feature-item {
+            flex: 1 1 160px;
+            background: white;
+            padding: 0.8rem 1rem;
+            border-radius: 40px;
+            text-align: center;
+            font-size: 0.94rem;
+            color: #3d2b1d;
+            box-shadow: 0 2px 8px rgba(150, 90, 40, 0.08);
+            border: 1px solid #ede0d3;
+        }
+
+        .feature-item .num {
+            font-weight: 600;
+            color: #825f41;
+            display: block;
+            font-size: 1.2rem;
+            margin-bottom: 2px;
+        }
+
+        /* FAQ 摘要 (轻量) */
+        .faq-mini {
+            margin-top: 2rem;
+            background: #f8efe5;
+            border-radius: 30px;
+            padding: 1.6rem 1.8rem;
+        }
+
+        .faq-mini details {
+            margin-bottom: 0.6rem;
+            border-bottom: 1px dashed #dac6b4;
+            padding-bottom: 0.6rem;
+        }
+
+        .faq-mini details:last-of-type {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .faq-mini summary {
+            font-weight: 510;
+            cursor: pointer;
+            color: #4b3627;
+            padding: 0.3rem 0;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .faq-mini summary::before {
+            content: "↪";
+            color: #a58363;
+            font-weight: 300;
+            font-size: 1.1rem;
+        }
+
+        .faq-mini details[open] summary::before {
+            content: "↕";
+        }
+
+        .faq-mini details p {
+            margin: 0.4rem 0 0.2rem 1.6rem;
+            font-size: 0.95rem;
+            color: #4f3b2b;
+        }
+
+        /* 结尾访问句 */
+        .closing-note {
+            margin-top: 2.4rem;
+            padding-top: 1.2rem;
+            border-top: 2px solid #e6d3c0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 1rem;
+        }
+
+        .closing-note p {
+            font-size: 1rem;
+            color: #3b2b1d;
+        }
+
+        .closing-note .stamp {
+            background: #dcc7b2;
+            color: #2d1f14;
+            padding: 0.2rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            letter-spacing: 0.4px;
+            white-space: nowrap;
+        }
+
+        hr {
+            border: none;
+            border-top: 2px dotted #dbc9b4;
+            margin: 1.8rem 0;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- 文章头部 -->
+    <div class="article-header">
+        <h1 class="article-title">
+            再访·雷速体育
+            <small>收藏夹里的老朋友</small>
+        </h1>
+        <div class="article-meta">
+            <span>📅 持续关注 · 2025</span>
+            <span class="tag"># 日常入口</span>
+            <span>⚡ 即时比分</span>
+        </div>
+    </div>
+
+    <!-- 导语 -->
+    <div class="excerpt">
+        <strong>有些网站，值得放在书签栏的显眼位置。</strong>  
+        再次打开 <a href="https://zh-score-leisu.com">雷速体育</a>，就像推开一扇熟悉的门——数据跳动、赛况流转，界面还是那样干净直接。没有多余的广告喧哗，只有你关心的那几场比赛。
+    </div>
+
+    <!-- 正文多段 -->
+    <div class="body-text">
+        <p>
+            坦白说，体育数据站多如牛毛，但能让我反复回来的不多。<strong>雷速体育</strong>是其中一个。<br>
+            第一次用是朋友随口提了一句：“你追的联赛，这儿更新最快。” 后来每次打开浏览器，总会顺手点一下书签——不是因为它有多花哨，而是因为它<strong>刚好够用</strong>：实时比分、赛程列表、交锋记录，一目了然。
+        </p>
+
+        <p>
+            我习惯在周末晚上打开 <a href="https://zh-score-leisu.com">雷速体育</a>，同时开着两三场直播文字流。页面不拖沓，数据刷新踏实，那种“叮”一声的动效让人安心。渐渐地，收藏夹里其他同类链接都删了，只留下这一个。
+        </p>
+
+        <p>
+            很多人问：为什么不去官方数据平台？<br>
+            我的回答是：<span class="inline-card">顺手</span> 两个字比什么都重要。<strong>雷速体育</strong>的界面没有过度设计，信息层级清楚，从联赛总览到单场详情，点两下就到。对于每天都要扫一眼赛果的人来说，这就是最舒服的节奏。
+        </p>
+
+        <!-- 轻量卡片：特点速览 -->
+        <div class="feature-quick">
+            <div class="feature-item">
+                <span class="num">⚡ 实时</span>
+                比分延迟控制在秒级
+            </div>
+            <div class="feature-item">
+                <span class="num">📋 干净</span>
+                无弹窗、无浮夸动效
+            </div>
+            <div class="feature-item">
+                <span class="num">🔖 可收藏</span>
+                直接保存，每次直达
+            </div>
+        </div>
+
+        <p>
+            我甚至把 <a href="https://zh-score-leisu.com">雷速体育</a> 设成了浏览器的启动页之一。早上打开电脑，扫一眼昨晚的最终比分；午休时快速翻翻即将开始的场次。它不像那些需要登录、关注、订阅的“重型应用”，就是一个——<strong>你来了，数据就在那里</strong>。
+        </p>
+    </div>
+
+    <!-- 引用提示块 -->
+    <div class="callout">
+        <div class="callout-title">
+            💡 一个小习惯
+            <span>keep it simple</span>
+        </div>
+        <p>如果你也和一样，经常想看某个联赛却懒得翻菜单，不妨把 <a href="https://zh-score-leisu.com">雷速体育</a> 放到书签栏第一排。</p>
+        <p>不用注册，不用关注，打开就是赛况。比很多App更轻，比搜索引擎直接。真正的好工具，往往是那种你<strong>不用思考怎么用</strong>的工具。</p>
+    </div>
+
+    <!-- 更多正文：从持续关注的角度 -->
+    <div class="body-text">
+        <p>
+            我注意到自己访问 <strong>雷速体育</strong> 的频率在慢慢变高。不是因为有什么“每日任务”，而是因为习惯。<br>
+            它覆盖的联赛越来越全（从五大联赛到一些冷门杯赛），但页面始终没有变得臃肿。这其实很难得——很多网站做着做着就加了资讯、社区、预测……然后什么都找不到。<strong>雷速体育</strong>一直保持“数据优先”的气质，像一个有原则的老编辑。
+        </p>
+
+        <p>
+            对了，如果你也收藏了它，不妨检查一下书签是否还能正常跳转。最近有朋友说换了浏览器忘了备份，结果找了半天才想起名字。<br>
+            无论如何，<a href="https://zh-score-leisu.com">雷速体育</a> 的域名一直没变，稳定得让人放心。
+        </p>
+    </div>
+
+    <!-- 轻量FAQ摘要（非固定章节，自然融入） -->
+    <div class="faq-mini">
+        <details>
+            <summary>为什么选择雷速体育而不是其他数据站？</summary>
+            <p>个人感受：加载快、界面不乱、没有诱导注册。对于只看比分的人，它就是最直接的那个。</p>
+        </details>
+        <details>
+            <summary>需要每天打开吗？</summary>
+            <p>不用刻意。把它放在手边，想起来了就点一下，比赛永远在那里等你。</p>
+        </details>
+        <details>
+            <summary>收藏夹里应该怎么命名？</summary>
+            <p>我就写了“雷速体育”四个字，简洁好找。你也可以加上⚽或者📊 前缀。</p>
+        </details>
+    </div>
+
+    <!-- 分割线 -->
+    <hr>
+
+    <!-- 结尾访问句 -->
+    <div class="closing-note">
+        <p>
+            <span style="font-size:1.2rem;">📌</span>  
+            下次再打开浏览器，如果一时不知道要看什么——试试 
+            <a href="https://zh-score-leisu.com" style="font-weight:560;">雷速体育</a>，它总有一场正在进行的比赛。
+        </p>
+        <span class="stamp">常访 · 老友</span>
+    </div>
+
+    <!-- 底部极简说明：纯装饰 -->
+    <div style="margin-top: 2rem; font-size: 0.8rem; color: #9a8573; text-align: center; border-radius: 30px; background: #f7ede2; padding: 0.4rem 1rem; opacity: 0.7;">
+        ⚡ 持续关注 · 数据流动 · 一如往常
+    </div>
+</div>
+</body>
+</html>
